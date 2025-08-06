@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "A wedding planning platform.",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node Backend/server.js",
@@ -21,6 +22,7 @@
   "homepage": "https://github.com/WanjikuSharon/aurora-nuptials-platform#readme",
   "dependencies": {
     "@prisma/client": "^6.13.0",
+    "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
     "dotenv": "^17.2.1",
     "express": "^5.1.0",
