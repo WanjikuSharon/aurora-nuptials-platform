@@ -1,4 +1,4 @@
-// This is your Prisma schema file,
+// Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 // Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
@@ -13,11 +13,218 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+enum UserRole {
+  ADMIN
+  COUPLE
+  VENDOR
+}
+
+enum VenueType {
+  OUTDOOR
+  INTIMATE
+  BEACH_WATERFRONT
+  BARN
+  ESTATE
+  VINEYARD
+  ALL_INCLUSIVE
+  REHEARSAL_DINNER
+  WEDDING_SHOWER
+}
+
+enum VendorCategory {
+  VENUE
+  PHOTOGRAPHER
+  VIDEOGRAPHER
+  CATERER
+  FLORIST
+  MAKEUP_BEAUTY
+  WEDDING_PLANNER
+  BAND_DJ
+  CAKE_DESSERT
+  BAR_BEVERAGE
+  OFFICIANT
+}
+
 model User {
   id        Int      @id @default(autoincrement())
   email     String   @unique
   name      String?
+  role      UserRole @default(COUPLE)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  
+  // Couple-specific fields
+  coupleProfile CoupleProfile?
+  
+  // Vendor-specific fields
+  vendorProfile VendorProfile?
+  
+  @@map("users")
+}
+
+model CoupleProfile {
+  id            Int      @id @default(autoincrement())
+  userId        Int      @unique
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  weddingDate   DateTime?
+  budget        Decimal?
+  guestCount    Int?
+  theme         String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  
+  // Relations
+  weddingRegistry WeddingRegistry?
+  favorites      Favorite[]
+  bookings       Booking[]
+  invitations    Invitation[]
+  
+  @@map("couple_profiles")
+}
+
+model VendorProfile {
+  id            Int             @id @default(autoincrement())
+  userId        Int             @unique
+  user          User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  businessName  String
+  category      VendorCategory
+  description   String?
+  priceRange    String?
+  verified      Boolean         @default(false)
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+  
+  // Relations
+  venues        Venue[]
+  bookings      Booking[]
+  reviews       Review[]
+  favorites     Favorite[]  // Add this missing relation field
+  
+  @@map("vendor_profiles")
+}
+
+model Venue {
+  id           Int         @id @default(autoincrement())
+  name         String
+  description  String?
+  venueType    VenueType
+  address      String
+  city         String
+  state        String
+  zipCode      String
+  capacity     Int?
+  priceRange   String?
+  amenities    String[]
+  images       String[]
+  availability Json?
+  vendorId     Int?
+  vendor       VendorProfile? @relation(fields: [vendorId], references: [id])
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+  
+  // Relations
+  favorites    Favorite[]
+  bookings     Booking[]
+  
+  @@map("venues")
+}
+
+model WeddingRegistry {
+  id              Int           @id @default(autoincrement())
+  coupleProfileId Int           @unique
+  coupleProfile   CoupleProfile @relation(fields: [coupleProfileId], references: [id], onDelete: Cascade)
+  registryItems   RegistryItem[]
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  
+  @@map("wedding_registries")
+}
+
+model RegistryItem {
+  id                Int             @id @default(autoincrement())
+  weddingRegistryId Int
+  weddingRegistry   WeddingRegistry @relation(fields: [weddingRegistryId], references: [id], onDelete: Cascade)
+  name              String
+  description       String?
+  price             Decimal?
+  imageUrl          String?
+  purchased         Boolean         @default(false)
+  createdAt         DateTime        @default(now())
+  
+  @@map("registry_items")
+}
+
+model Favorite {
+  id              Int           @id @default(autoincrement())
+  coupleProfileId Int
+  coupleProfile   CoupleProfile @relation(fields: [coupleProfileId], references: [id], onDelete: Cascade)
+  venueId         Int?
+  venue           Venue?        @relation(fields: [venueId], references: [id], onDelete: Cascade)
+  vendorId        Int?
+  vendor          VendorProfile? @relation(fields: [vendorId], references: [id], onDelete: Cascade)
+  createdAt       DateTime      @default(now())
+  
+  @@unique([coupleProfileId, venueId])
+  @@unique([coupleProfileId, vendorId])
+  @@map("favorites")
+}
+
+model Booking {
+  id              Int           @id @default(autoincrement())
+  coupleProfileId Int
+  coupleProfile   CoupleProfile @relation(fields: [coupleProfileId], references: [id], onDelete: Cascade)
+  venueId         Int?
+  venue           Venue?        @relation(fields: [venueId], references: [id])
+  vendorId        Int?
+  vendor          VendorProfile? @relation(fields: [vendorId], references: [id])
+  eventDate       DateTime
+  status          String        @default("pending")
+  notes           String?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  
+  @@map("bookings")
+}
+
+model Invitation {
+  id              Int           @id @default(autoincrement())
+  coupleProfileId Int
+  coupleProfile   CoupleProfile @relation(fields: [coupleProfileId], references: [id], onDelete: Cascade)
+  template        String
+  customization   Json?
+  guestList       Json?
+  sentAt          DateTime?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  
+  @@map("invitations")
+}
+
+model Review {
+  id        Int           @id @default(autoincrement())
+  vendorId  Int
+  vendor    VendorProfile @relation(fields: [vendorId], references: [id], onDelete: Cascade)
+  rating    Int
+  comment   String?
+  reviewerName String?
+  createdAt DateTime      @default(now())
+  
+  @@map("reviews")
+}
+
+model InspirationPost {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String?
+  images      String[]
+  theme       String?
+  vendors     Json?
+  venues      Json?
+  featured    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@map("inspiration_posts")
 }
 
