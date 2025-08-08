@@ -9,20 +9,31 @@ const prisma = new PrismaClient();
 // Register new user
 router.post('/register', async (req, res) => {
   try {
+    console.log('Registration request received:', req.body);
+    
     const { email, name, password, role = 'COUPLE' } = req.body;
     
+    // Validate input
+    if (!email || !password) {
+      return res.status(400).json({ error: 'Email and password are required' });
+    }
+    
+    console.log('Checking if user exists...');
     // Check if user exists
     const existingUser = await prisma.user.findUnique({
       where: { email }
     });
     
     if (existingUser) {
+      console.log('User already exists');
       return res.status(400).json({ error: 'User already exists' });
     }
     
+    console.log('Hashing password...');
     // Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
     
+    console.log('Creating user...');
     // Create user
     const user = await prisma.user.create({
       data: {
@@ -33,12 +44,16 @@ router.post('/register', async (req, res) => {
       }
     });
     
+    console.log('User created:', user.id);
+    
     // Create profile based on role
     if (role === 'COUPLE') {
+      console.log('Creating couple profile...');
       await prisma.coupleProfile.create({
         data: { userId: user.id }
       });
     } else if (role === 'VENDOR') {
+      console.log('Creating vendor profile...');
       await prisma.vendorProfile.create({
         data: {
           userId: user.id,
@@ -48,6 +63,7 @@ router.post('/register', async (req, res) => {
       });
     }
     
+    console.log('Generating token...', {token});
     // Generate token
     const token = jwt.sign(
       { userId: user.id, role: user.role },
@@ -55,6 +71,7 @@ router.post('/register', async (req, res) => {
       { expiresIn: '7d' }
     );
     
+    console.log('Registration successful');
     res.status(201).json({
       token,
       user: {
@@ -65,15 +82,27 @@ router.post('/register', async (req, res) => {
       }
     });
   } catch (error) {
-    res.status(500).json({ error: 'Registration failed' });
+    console.error('Registration error:', error);
+    res.status(500).json({ 
+      error: 'Registration failed', 
+      details: error.message 
+    });
   }
 });
 
 // Login user
 router.post('/login', async (req, res) => {
   try {
+    console.log('Login request received:', req.body);
+    
     const { email, password } = req.body;
     
+    // Validate input
+    if (!email || !password) {
+      return res.status(400).json({ error: 'Email and password are required' });
+    }
+    
+    console.log('Finding user...');
     // Find user
     const user = await prisma.user.findUnique({
       where: { email },
@@ -84,15 +113,19 @@ router.post('/login', async (req, res) => {
     });
     
     if (!user) {
+      console.log('User not found');
       return res.status(400).json({ error: 'Invalid credentials' });
     }
     
+    console.log('Checking password...');
     // Check password
     const validPassword = await bcrypt.compare(password, user.password);
     if (!validPassword) {
+      console.log('Invalid password');
       return res.status(400).json({ error: 'Invalid credentials' });
     }
     
+    console.log('Generating token...');
     // Generate token
     const token = jwt.sign(
       { userId: user.id, role: user.role },
@@ -100,6 +133,7 @@ router.post('/login', async (req, res) => {
       { expiresIn: '7d' }
     );
     
+    console.log('Login successful');
     res.json({
       token,
       user: {
@@ -111,61 +145,12 @@ router.post('/login', async (req, res) => {
       }
     });
   } catch (error) {
-    res.status(500).json({ error: 'Login failed' });
-  }
-});
-
-// Get user profile
-router.get('/profile', authenticateToken, async (req, res) => {
-  try {
-    const user = await prisma.user.findUnique({
-      where: { id: req.user.userId },
-      include: {
-        coupleProfile: {
-          include: {
-            weddingRegistry: {
-              include: { registryItems: true }
-            },
-            favorites: {
-              include: {
-                venue: true,
-                vendor: true
-              }
-            }
-          }
-        },
-        vendorProfile: {
-          include: {
-            venues: true,
-            reviews: true
-          }
-        }
-      }
+    console.error('Login error:', error);
+    res.status(500).json({ 
+      error: 'Login failed', 
+      details: error.message 
     });
-    
-    res.json(user);
-  } catch (error) {
-    res.status(500).json({ error: 'Failed to fetch profile' });
   }
 });
 
-// Middleware for authentication
-function authenticateToken(req, res, next) {
-  const authHeader = req.headers['authorization'];
-  const token = authHeader && authHeader.split(' ')[1];
-  
-  if (!token) {
-    return res.status(401).json({ error: 'Access denied' });
-  }
-  
-  jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
-    if (err) {
-      return res.status(403).json({ error: 'Invalid token' });
-    }
-    req.user = user;
-    next();
-  });
-}
-
-export { authenticateToken };
 export default router;
