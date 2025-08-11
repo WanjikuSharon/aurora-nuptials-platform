@@ -131,6 +131,14 @@ const login = async (req, res) => {
       { expiresIn: '7d' }
     );
     
+    // Set token in cookie
+    res.cookie('token', token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'strict',
+      maxAge: 24 * 60 * 60 * 1000, // 24 hours
+    });
+
     console.log('Login successful');
     res.json({
       token,
@@ -154,9 +162,24 @@ const login = async (req, res) => {
 // Get user profile
 const getProfile = async (req, res) => {
   try {
+    //console.log('Getting profile for user:', req.user);
+    const token = req.cookies.token;
+
+    if (!req.user || !req.user.userId) {
+      return res.status(400).json({ error: 'Invalid user data in token' });
+    }
+    
+    console.log('Fetching user with ID:', req.user.userId);
+    
     const user = await prisma.user.findUnique({
       where: { id: req.user.userId },
-      include: {
+      select: {
+        id: true,
+        email: true,
+        name: true,
+        role: true,
+        createdAt: true,
+        updatedAt: true,
         coupleProfile: {
           include: {
             weddingRegistry: {
@@ -164,8 +187,22 @@ const getProfile = async (req, res) => {
             },
             favorites: {
               include: {
-                venue: true,
-                vendor: true
+                venue: {
+                  select: {
+                    id: true,
+                    name: true,
+                    venueType: true,
+                    city: true,
+                    priceRange: true
+                  }
+                },
+                vendor: {
+                  select: {
+                    id: true,
+                    businessName: true,
+                    category: true
+                  }
+                }
               }
             }
           }
@@ -180,13 +217,18 @@ const getProfile = async (req, res) => {
     });
     
     if (!user) {
+      console.log('User not found in database');
       return res.status(404).json({ error: 'User not found' });
     }
     
+    console.log('User found successfully');
     res.json(user);
   } catch (error) {
     console.error('Get profile error:', error);
-    res.status(500).json({ error: 'Failed to fetch profile' });
+    res.status(500).json({ 
+      error: 'Failed to fetch profile',
+      details: error.message 
+    });
   }
 };
 
@@ -231,4 +273,26 @@ const updateProfile = async (req, res) => {
   }
 };
 
-export {register, login, getProfile, updateProfile};
+// Debug function to test database connectivity
+const debugUser = async (req, res) => {
+  try {
+    const users = await prisma.user.findMany({
+      select: {
+        id: true,
+        email: true,
+        role: true,
+        createdAt: true
+      }
+    });
+    res.json({ 
+      message: 'Database connected',
+      userCount: users.length,
+      users: users
+    });
+  } catch (error) {
+    console.error('Debug error:', error);
+    res.status(500).json({ error: error.message });
+  }
+};
+
+export {register, login, getProfile, updateProfile, debugUser};
