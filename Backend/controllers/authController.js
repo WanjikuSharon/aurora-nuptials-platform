@@ -1,4 +1,3 @@
-import express from 'express';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { PrismaClient } from '../../generated/prisma/index.js';
@@ -62,7 +61,7 @@ const register = async (req, res) => {
       });
     }
     
-    console.log('Generating token...', {token});
+    console.log('Generating token...');
     // Generate token
     const token = jwt.sign(
       { userId: user.id, role: user.role },
@@ -87,7 +86,7 @@ const register = async (req, res) => {
       details: error.message 
     });
   }
-});
+};
 
 // Login user
 const login = async (req, res) => {
@@ -150,7 +149,86 @@ const login = async (req, res) => {
       details: error.message 
     });
   }
-},
+};
 
-// Export controller functions
-export { register, login };
+// Get user profile
+const getProfile = async (req, res) => {
+  try {
+    const user = await prisma.user.findUnique({
+      where: { id: req.user.userId },
+      include: {
+        coupleProfile: {
+          include: {
+            weddingRegistry: {
+              include: { registryItems: true }
+            },
+            favorites: {
+              include: {
+                venue: true,
+                vendor: true
+              }
+            }
+          }
+        },
+        vendorProfile: {
+          include: {
+            venues: true,
+            reviews: true
+          }
+        }
+      }
+    });
+    
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+    
+    res.json(user);
+  } catch (error) {
+    console.error('Get profile error:', error);
+    res.status(500).json({ error: 'Failed to fetch profile' });
+  }
+};
+
+// Update user profile
+const updateProfile = async (req, res) => {
+  try {
+    const { name, weddingDate, budget, guestCount, theme, businessName, category, description, priceRange } = req.body;
+    
+    // Update user basic info
+    const updatedUser = await prisma.user.update({
+      where: { id: req.user.userId },
+      data: { name }
+    });
+    
+    // Update role-specific profile
+    if (req.user.role === 'COUPLE') {
+      await prisma.coupleProfile.update({
+        where: { userId: req.user.userId },
+        data: {
+          weddingDate: weddingDate ? new Date(weddingDate) : undefined,
+          budget: budget ? parseFloat(budget) : undefined,
+          guestCount: guestCount ? parseInt(guestCount) : undefined,
+          theme
+        }
+      });
+    } else if (req.user.role === 'VENDOR') {
+      await prisma.vendorProfile.update({
+        where: { userId: req.user.userId },
+        data: {
+          businessName,
+          category,
+          description,
+          priceRange
+        }
+      });
+    }
+    
+    res.json({ message: 'Profile updated successfully' });
+  } catch (error) {
+    console.error('Update profile error:', error);
+    res.status(500).json({ error: 'Failed to update profile' });
+  }
+};
+
+export {register, login, getProfile, updateProfile};
