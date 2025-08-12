@@ -1,79 +1,30 @@
 import express from 'express';
-import { PrismaClient } from '../../generated/prisma/index.js';
+import {
+  getVenues,
+  getVenueById,
+  createVenue,
+  updateVenue,
+  deleteVenue,
+  getVenueTypes,
+  addToFavorites,
+  removeFromFavorites
+} from '../controllers/venueController.js';
+import { authenticateToken, requireRole } from '../middleware/auth.js';
 
 const router = express.Router();
-const prisma = new PrismaClient();
 
-// Define your routes here
-//GET /api/venues -  Get all venues
-router.get('/', async (req, res) => {
-  try {
-    const { venueType, city, capacity, priceRange } = req.query;
-    
-    const where = {};
-    if (venueType) where.venueType = venueType;
-    if (city) where.city = { contains: city, mode: 'insensitive' };
-    if (capacity) where.capacity = { gte: parseInt(capacity) };
-    
-    const venues = await prisma.venue.findMany({
-      where,
-      include: {
-        vendor: {
-          select: { businessName: true, verified: true }
-        }
-        }
-    });
-      
-      res.json(venues);
-  } catch (error) {
-      (500).json({ error: 'Failed to fetch venues' });
-    }
-});
-// POST /api/venues - Create a new venue
-router.post('/', async (req, res) => {
-  try {
-    const { name, venueType, city, capacity, priceRange, vendorId } = req.body;
-    
-    const newVenue = await prisma.venue.create({
-      data: {
-        name,
-        venueType,
-        city,
-        capacity: parseInt(capacity),
-        priceRange,
-        vendor: { connect: { id: vendorId } }
-      }
-    });
-    
-    res.status(201).json(newVenue);
-  } catch (error) {
-    res.status(500).json({ error: 'Failed to create venue' });
-  }
-});
+// Public routes
+router.get('/', getVenues);                    // GET /api/venues - Get all venues with filters
+router.get('/types', getVenueTypes);          // GET /api/venues/types - Get venue types
+router.get('/:id', getVenueById);             // GET /api/venues/:id - Get single venue
 
-// GET /api/venues/:id - Get a specific venue by ID
-router.get('/:id', async (req, res) => {
-    const { id } = req.params;
-    
-    try {
-        const venue = await prisma.venue.findUnique({
-        where: { id: parseInt(id) },
-        include: {
-            vendor: {
-            select: { businessName: true, verified: true }
-            }
-        }
-        });
-        
-        if (!venue) {
-        return res.status(404).json({ error: 'Venue not found' });
-        }
-        
-        res.json(venue);
-    } catch (error) {
-        res.status(500).json({ error: 'Failed to fetch venue' });
-    }
-});
-    
+// Protected routes - Vendor/Admin only
+router.post('/', authenticateToken, createVenue);                    // POST /api/venues - Create venue
+router.put('/:id', authenticateToken, updateVenue);                  // PUT /api/venues/:id - Update venue
+router.delete('/:id', authenticateToken, deleteVenue);               // DELETE /api/venues/:id - Delete venue
+
+// Protected routes - Couple only  
+router.post('/:id/favorites', authenticateToken, addToFavorites);    // POST /api/venues/:id/favorites - Add to favorites
+router.delete('/:id/favorites', authenticateToken, removeFromFavorites); // DELETE /api/venues/:id/favorites - Remove from favorites
 
 export default router;

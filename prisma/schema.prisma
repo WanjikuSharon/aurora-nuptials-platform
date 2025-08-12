@@ -113,7 +113,7 @@ model Venue {
   address      String
   city         String
   state        String
-  zipCode      String
+  zipCode      String?
   capacity     Int?
   priceRange   String?
   amenities    String[]

@@ -28,6 +28,12 @@ app.get('/', (req, res) => {
   res.json({ message: 'Aurora Nuptials Platform API' });
 });
 
+// Global error handler
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ error: 'Something went wrong!' });
+});
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
