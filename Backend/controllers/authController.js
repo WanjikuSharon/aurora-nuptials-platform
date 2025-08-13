@@ -297,4 +297,31 @@ const debugUser = async (req, res) => {
   }
 };
 
-export {register, login, getProfile, updateProfile, debugUser};
+
+//to be deleted
+// Add to your authController.js
+const debugCouples = async (req, res) => {
+  try {
+    const couples = await prisma.user.findMany({
+      where: { role: 'COUPLE' },
+      include: {
+        coupleProfile: true
+      }
+    });
+    
+    res.json({
+      message: 'Debug: All couples',
+      couples: couples.map(c => ({
+        id: c.id,
+        email: c.email,
+        name: c.name,
+        hasCoupleProfile: !!c.coupleProfile,
+        coupleProfileId: c.coupleProfile?.id
+      }))
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+export { register, login, getProfile, updateProfile, debugUser, fixVendorProfile, debugCouples };
