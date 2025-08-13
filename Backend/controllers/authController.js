@@ -42,34 +42,39 @@ const register = async (req, res) => {
       }
     });
     
-    console.log('User created:', user.id);
+    console.log('User created successfully:', user.id);
     
     // Create profile based on role
     if (role === 'COUPLE') {
       console.log('Creating couple profile...');
       await prisma.coupleProfile.create({
-        data: { userId: user.id }
+        data: {
+          userId: user.id
+        }
       });
+      console.log('Couple profile created');
     } else if (role === 'VENDOR') {
       console.log('Creating vendor profile...');
       await prisma.vendorProfile.create({
         data: {
           userId: user.id,
-          businessName: name || 'New Business',
-          category: 'PHOTOGRAPHER' // Default, can be updated later
+          businessName: name || 'My Business',
+          category: 'VENUE', // Default category
+          description: 'Wedding service provider'
         }
       });
+      console.log('Vendor profile created');
     }
     
-    console.log('Generating token...');
-    // Generate token
+    // Generate JWT token
     const token = jwt.sign(
       { userId: user.id, role: user.role },
       process.env.JWT_SECRET,
       { expiresIn: '7d' }
     );
     
-    console.log('Registration successful');
+    console.log('Registration completed successfully');
+    
     res.status(201).json({
       token,
       user: {
@@ -81,10 +86,7 @@ const register = async (req, res) => {
     });
   } catch (error) {
     console.error('Registration error:', error);
-    res.status(500).json({ 
-      error: 'Registration failed', 
-      details: error.message 
-    });
+    res.status(500).json({ error: 'Failed to register user' });
   }
 };
 
