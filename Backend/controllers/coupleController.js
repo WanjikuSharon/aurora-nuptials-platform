@@ -126,9 +126,7 @@ const updateProfile = async (req, res) => {
       weddingDate,
       budget,
       guestCount,
-      theme,
-      venue,
-      notes
+      theme
     } = req.body;
 
     // Update user basic info if provided
@@ -146,9 +144,7 @@ const updateProfile = async (req, res) => {
         weddingDate: weddingDate ? new Date(weddingDate) : undefined,
         budget: budget ? parseFloat(budget) : undefined,
         guestCount: guestCount ? parseInt(guestCount) : undefined,
-        theme,
-        venue,
-        notes
+        theme
       },
       include: {
         user: {
