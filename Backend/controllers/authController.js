@@ -324,4 +324,37 @@ const debugCouples = async (req, res) => {
   }
 };
 
-export { register, login, getProfile, updateProfile, debugUser, fixVendorProfile, debugCouples };
+// Add this function to your authController.js file, before the export statement
+
+// Fix couple profile if missing
+const fixCoupleProfile = async (req, res) => {
+  try {
+    if (req.user.role !== 'COUPLE') {
+      return res.status(403).json({ error: 'Only for couple users' });
+    }
+    
+    // Check if couple profile exists
+    const existingProfile = await prisma.coupleProfile.findUnique({
+      where: { userId: req.user.userId }
+    });
+    
+    if (existingProfile) {
+      return res.json({ message: 'Couple profile already exists', profile: existingProfile });
+    }
+    
+    // Create couple profile
+    const coupleProfile = await prisma.coupleProfile.create({
+      data: {
+        userId: req.user.userId
+      }
+    });
+    
+    res.json({ message: 'Couple profile created', profile: coupleProfile });
+  } catch (error) {
+    console.error('Fix couple profile error:', error);
+    res.status(500).json({ error: 'Failed to create couple profile' });
+  }
+};
+
+// Update the export line at the end of authController.js
+export { register, login, getProfile, updateProfile, debugUser, debugCouples, fixCoupleProfile };
