@@ -5,7 +5,7 @@ import cookieParser from 'cookie-parser';
 import userRoutes from './routes/userRoutes.js';
 import venueRoutes from './routes/venueRoutes.js';
 import vendorRoutes from './routes/vendorRoutes.js';
-
+import coupleRoutes from './routes/coupleRoutes.js';
 // Load environment variables
 dotenv.config();
 
@@ -22,6 +22,7 @@ app.use(cookieParser());
 app.use('/api/users', userRoutes);
 app.use('/api/venues', venueRoutes);
 app.use('/api/vendors', vendorRoutes);
+app.use('/api/couples', coupleRoutes);
 
 // Basic route
 app.get('/', (req, res) => {
