@@ -122,12 +122,33 @@ const updateProfile = async (req, res) => {
       return res.status(403).json({ error: 'Only couples can update their profile' });
     }
 
+    console.log('Updating profile for userId:', req.user.userId);
+    console.log('Request body:', req.body);
+
     const {
       weddingDate,
       budget,
       guestCount,
-      theme
+      theme,
+      venue,
+      notes
     } = req.body;
+
+    // First, check if user exists
+    const existingUser = await prisma.user.findUnique({
+      where: { id: req.user.userId },
+      include: {
+        coupleProfile: true
+      }
+    });
+
+    if (!existingUser) {
+      console.log('User not found:', req.user.userId);
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    console.log('User found:', existingUser.email);
+    console.log('Couple profile exists:', !!existingUser.coupleProfile);
 
     // Update user basic info if provided
     if (req.body.name) {
@@ -135,32 +156,72 @@ const updateProfile = async (req, res) => {
         where: { id: req.user.userId },
         data: { name: req.body.name }
       });
+      console.log('User name updated');
     }
 
-    // Update couple profile
-    const updatedProfile = await prisma.coupleProfile.update({
-      where: { userId: req.user.userId },
-      data: {
-        weddingDate: weddingDate ? new Date(weddingDate) : undefined,
-        budget: budget ? parseFloat(budget) : undefined,
-        guestCount: guestCount ? parseInt(guestCount) : undefined,
-        theme
-      },
-      include: {
-        user: {
-          select: {
-            id: true,
-            name: true,
-            email: true
+    // Create or update couple profile
+    let updatedProfile;
+    
+    if (!existingUser.coupleProfile) {
+      // Create couple profile if it doesn't exist
+      console.log('Creating new couple profile...');
+      updatedProfile = await prisma.coupleProfile.create({
+        data: {
+          userId: req.user.userId,
+          weddingDate: weddingDate ? new Date(weddingDate) : null,
+          budget: budget ? parseFloat(budget) : null,
+          guestCount: guestCount ? parseInt(guestCount) : null,
+          theme,
+          venue,
+          notes
+        },
+        include: {
+          user: {
+            select: {
+              id: true,
+              name: true,
+              email: true
+            }
           }
         }
-      }
-    });
+      });
+      console.log('Couple profile created');
+    } else {
+      // Update existing couple profile
+      console.log('Updating existing couple profile...');
+      updatedProfile = await prisma.coupleProfile.update({
+        where: { userId: req.user.userId },
+        data: {
+          weddingDate: weddingDate ? new Date(weddingDate) : undefined,
+          budget: budget ? parseFloat(budget) : undefined,
+          guestCount: guestCount ? parseInt(guestCount) : undefined,
+          theme,
+          venue,
+          notes
+        },
+        include: {
+          user: {
+            select: {
+              id: true,
+              name: true,
+              email: true
+            }
+          }
+        }
+      });
+      console.log('Couple profile updated');
+    }
 
     res.json(updatedProfile);
   } catch (error) {
     console.error('Update profile error:', error);
-    res.status(500).json({ error: 'Failed to update profile' });
+    console.error('Error code:', error.code);
+    console.error('Error meta:', error.meta);
+    res.status(500).json({ 
+      error: 'Failed to update profile',
+      details: error.message,
+      code: error.code
+    });
   }
 };
 
