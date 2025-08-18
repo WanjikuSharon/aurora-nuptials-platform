@@ -6,6 +6,8 @@ import userRoutes from './routes/userRoutes.js';
 import venueRoutes from './routes/venueRoutes.js';
 import vendorRoutes from './routes/vendorRoutes.js';
 import coupleRoutes from './routes/coupleRoutes.js';
+import registryRoute from './routes/registryRoute.js'
+
 // Load environment variables
 dotenv.config();
 
@@ -15,7 +17,6 @@ const PORT = process.env.PORT || 5000;
 // Middleware
 app.use(cors());
 app.use(express.json());
-
 app.use(cookieParser());
 
 // Routes
@@ -23,6 +24,7 @@ app.use('/api/users', userRoutes);
 app.use('/api/venues', venueRoutes);
 app.use('/api/vendors', vendorRoutes);
 app.use('/api/couples', coupleRoutes);
+app.use('/api/registry', registryRoute);
 
 // Basic route
 app.get('/', (req, res) => {
