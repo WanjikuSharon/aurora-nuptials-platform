@@ -144,16 +144,31 @@ model WeddingRegistry {
   @@map("wedding_registries")
 }
 
+enum ItemPriority {
+  LOW
+  MEDIUM
+  HIGH
+}
+
 model RegistryItem {
   id                Int             @id @default(autoincrement())
   weddingRegistryId Int
   weddingRegistry   WeddingRegistry @relation(fields: [weddingRegistryId], references: [id], onDelete: Cascade)
   name              String
   description       String?
-  price             Decimal?
-  imageUrl          String?
+  price             Float           // Changed from Decimal to Float for easier use
+  quantity          Int             @default(1)
+  category          String?
+  brand             String?
+  url               String?
+  image             String?         // Changed from imageUrl to image
+  priority          ItemPriority    @default(MEDIUM)
   purchased         Boolean         @default(false)
+  purchasedBy       String?
+  purchaseDate      DateTime?
+  purchaseMessage   String?
   createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
   
   @@map("registry_items")
 }

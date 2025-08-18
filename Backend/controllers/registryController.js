@@ -129,7 +129,7 @@ const addRegistryItem = async (req, res) => {
         url,
         image,
         priority,
-        registryId: registry.id
+        weddingRegistryId: registry.id
       }
     });
 
