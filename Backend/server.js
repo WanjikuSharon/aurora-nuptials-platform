@@ -26,6 +26,7 @@ app.use('/api/venues', venueRoutes);
 app.use('/api/vendors', vendorRoutes);
 app.use('/api/couples', coupleRoutes);
 app.use('/api/registry', registryRoute);
+app.use('/api/bookings', bookingRoute);
 
 // Basic route
 app.get('/', (req, res) => {
