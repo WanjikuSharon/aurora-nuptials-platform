@@ -7,7 +7,7 @@ import venueRoutes from './routes/venueRoutes.js';
 import vendorRoutes from './routes/vendorRoutes.js';
 import coupleRoutes from './routes/coupleRoutes.js';
 import registryRoute from './routes/registryRoute.js';
-
+import bookingRoute from './routes/bookingRoutes.js';
 
 // Load environment variables
 dotenv.config();
