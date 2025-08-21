@@ -75,7 +75,7 @@ const Dashboard: React.FC = () => {
             <h3 className="text-lg font-semibold text-gray-900 mb-2">
               Unable to Load Dashboard
             </h3>
-            <p className="text-gray-600 mb-4">
+            <p className="text-gray-800 font-medium mb-4 drop-shadow-sm">
               We're having trouble loading your dashboard. Please try again.
             </p>
             <button 
@@ -104,7 +104,7 @@ const Dashboard: React.FC = () => {
           <h1 className="text-3xl font-serif font-bold text-gray-900 mb-2">
             Welcome back, {user?.name}! 💕
           </h1>
-          <p className="text-gray-600">
+          <p className="text-gray-800 font-medium drop-shadow-sm">
             {daysUntilWedding !== null ? (
               daysUntilWedding > 0 ? (
                 <>Only {daysUntilWedding} days until your special day!</>
@@ -270,7 +270,7 @@ const Dashboard: React.FC = () => {
               ) : (
                 <div className="text-center py-8">
                   <Calendar className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-                  <p className="text-gray-600 mb-4">No bookings yet</p>
+                  <p className="text-gray-700 font-medium mb-4 drop-shadow-sm">No bookings yet</p>
                   <Link to="/venues" className="btn-primary">
                     Browse Venues
                   </Link>
@@ -343,7 +343,7 @@ const Dashboard: React.FC = () => {
               ) : (
                 <div className="text-center py-6">
                   <Gift className="w-8 h-8 text-gray-400 mx-auto mb-2" />
-                  <p className="text-sm text-gray-600 mb-3">No registry items yet</p>
+                  <p className="text-sm text-gray-700 font-medium mb-3 drop-shadow-sm">No registry items yet</p>
                   <Link to="/couple/registry" className="btn-primary text-sm">
                     <Plus className="w-4 h-4 mr-1" />
                     Add Items

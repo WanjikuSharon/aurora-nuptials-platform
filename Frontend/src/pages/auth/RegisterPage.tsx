@@ -139,7 +139,7 @@ const RegisterPage: React.FC = () => {
           <h2 className="text-3xl font-serif font-bold text-gray-900 mb-2">
             Create Your Account
           </h2>
-          <p className="text-gray-600">
+          <p className="text-gray-800 font-medium drop-shadow-sm">
             Join thousands of couples planning their perfect wedding
           </p>
         </div>
@@ -333,7 +333,7 @@ const RegisterPage: React.FC = () => {
 
           {/* Sign In Link */}
           <div className="mt-6 text-center">
-            <p className="text-sm text-gray-600">
+            <p className="text-sm text-gray-700 font-medium drop-shadow-sm">
               Already have an account?{' '}
               <Link
                 to="/login"

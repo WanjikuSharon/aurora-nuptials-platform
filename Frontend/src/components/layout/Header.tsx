@@ -72,13 +72,13 @@ const Header: React.FC = () => {
   const navLinks = getNavLinks();
 
   return (
-    <header className="bg-white shadow-sm border-b border-gray-100 sticky top-0 z-40">
+    <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-navy/60 border-b border-white/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+        <div className="flex justify-between items-center h-16 lg:h-20">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
-            <Heart className="w-8 h-8 text-rose-gold" />
-            <span className="text-2xl font-serif font-bold text-gray-900">
+            <Heart className="w-8 h-8 text-gold" />
+            <span className="text-2xl font-serif font-bold text-white">
               Aurora Nuptials
             </span>
           </Link>
@@ -89,7 +89,7 @@ const Header: React.FC = () => {
               <Link
                 key={link.name}
                 to={link.href}
-                className="text-gray-700 hover:text-rose-gold transition-colors duration-200 font-medium"
+                className="text-white hover:text-gold transition-colors duration-300 font-medium relative nav-link-glass"
               >
                 {link.name}
               </Link>
@@ -102,7 +102,7 @@ const Header: React.FC = () => {
               <div className="relative">
                 <button
                   onClick={toggleProfileMenu}
-                  className="flex items-center space-x-2 text-gray-700 hover:text-rose-gold transition-colors duration-200"
+                  className="flex items-center space-x-2 text-white hover:text-gold transition-colors duration-300"
                 >
                   <User className="w-5 h-5" />
                   <span className="font-medium">{user?.name || 'User'}</span>
@@ -110,15 +110,15 @@ const Header: React.FC = () => {
 
                 {/* Profile Dropdown */}
                 {isProfileMenuOpen && (
-                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-100 py-2">
-                    <div className="px-4 py-2 border-b border-gray-100">
-                      <p className="text-sm font-medium text-gray-900">{user?.name}</p>
-                      <p className="text-sm text-gray-500">{user?.email}</p>
-                      <p className="text-xs text-rose-gold capitalize">{user?.role?.toLowerCase()}</p>
+                  <div className="absolute right-0 mt-2 w-48 bg-white/95 backdrop-blur-md rounded-lg shadow-xl border border-white/20 py-2">
+                    <div className="px-4 py-2 border-b border-gray-200">
+                      <p className="text-sm font-medium text-navy">{user?.name}</p>
+                      <p className="text-sm text-medium-gray">{user?.email}</p>
+                      <p className="text-xs text-gold capitalize font-medium">{user?.role?.toLowerCase()}</p>
                     </div>
                     <Link
                       to="/profile"
-                      className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                      className="flex items-center px-4 py-2 text-sm text-navy hover:bg-champagne/50 transition-colors"
                       onClick={() => setIsProfileMenuOpen(false)}
                     >
                       <Settings className="w-4 h-4 mr-2" />
@@ -126,7 +126,7 @@ const Header: React.FC = () => {
                     </Link>
                     <button
                       onClick={handleLogout}
-                      className="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                      className="flex items-center w-full px-4 py-2 text-sm text-navy hover:bg-champagne/50 transition-colors"
                     >
                       <LogOut className="w-4 h-4 mr-2" />
                       Sign Out
@@ -138,13 +138,13 @@ const Header: React.FC = () => {
               <div className="flex items-center space-x-4">
                 <Link
                   to="/login"
-                  className="text-gray-700 hover:text-rose-gold transition-colors duration-200 font-medium"
+                  className="text-white hover:text-gold transition-colors duration-300 font-medium"
                 >
                   Sign In
                 </Link>
                 <Link
                   to="/register"
-                  className="btn-primary"
+                  className="bg-gold hover:bg-gold/90 text-navy font-medium py-2 px-6 rounded-lg transition-all duration-300 shadow-lg hover:shadow-gold/25 hover:shadow-xl transform hover:scale-105"
                 >
                   Get Started
                 </Link>
@@ -155,7 +155,7 @@ const Header: React.FC = () => {
           {/* Mobile menu button */}
           <button
             onClick={toggleMenu}
-            className="md:hidden p-2 rounded-lg text-gray-700 hover:text-rose-gold hover:bg-gray-50"
+            className="md:hidden p-2 rounded-lg text-white hover:text-gold hover:bg-white/10 transition-colors duration-300"
           >
             {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>

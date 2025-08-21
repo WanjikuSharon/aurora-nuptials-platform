@@ -83,6 +83,40 @@
   .section-divider {
     @apply w-24 h-0.5 bg-gold mx-auto mb-8;
   }
+
+  /* Glass Navbar Effects */
+  .nav-link-glass {
+    position: relative;
+  }
+
+  .nav-link-glass::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #D4AF37, #F7E7CE);
+    transition: width 0.3s ease;
+  }
+
+  .nav-link-glass:hover::after {
+    width: 100%;
+  }
+
+  /* Backdrop blur support */
+  @supports (backdrop-filter: blur(12px)) {
+    .backdrop-blur-md {
+      backdrop-filter: blur(12px);
+    }
+  }
+
+  /* Fallback for older browsers */
+  @supports not (backdrop-filter: blur(12px)) {
+    .backdrop-blur-md {
+      background-color: rgba(10, 25, 47, 0.8);
+    }
+  }
 }
 
 /* Custom scrollbar */

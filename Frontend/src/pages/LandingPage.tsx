@@ -11,6 +11,7 @@ import {
   ArrowRight,
   Sparkles
 } from 'lucide-react';
+import Header from '../components/layout/Header';
 
 const LandingPage: React.FC = () => {
   // Stats counter state
@@ -210,8 +211,9 @@ const LandingPage: React.FC = () => {
 
   return (
     <div className="min-h-screen">
+      <Header />
 {/* Hero Section with Carousel Background */}
-<section className="relative min-h-screen flex items-center py-20 lg:py-32 overflow-hidden">
+<section className="relative min-h-screen flex items-center py-20 lg:py-32 overflow-hidden pt-16 lg:pt-20">
   {/* Background Carousel */}
   <div className="absolute inset-0 z-0">
     <div className="carousel-container relative w-full h-full">
@@ -233,14 +235,14 @@ const LandingPage: React.FC = () => {
           </div>
           <div className="carousel-slide active">
         <img 
-          src="https://images.unsplash.com/photo-1664646449779-ee70428b3936?w=2070&auto=format&fit=crop&q=80&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8YmxhY2slMjB3ZWRkaW5nfGVufDB8fDB8fHww" 
+          src="https://images.unsplash.com/photo-1664646449735-69bc987a49da?w=2070&auto=format&fit=crop&q=80&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8YmxhY2slMjB3ZWRkaW5nfGVufDB8fDB8fHww" 
           alt="Beautiful wedding ceremony"
           className="w-full h-full object-cover object-center"
         />
       </div>
       <div className="carousel-slide">
         <img 
-          src="https://media.istockphoto.com/id/1212726850/photo/festive-table-setting-candles-for-wedding-party.webp?a=1&b=1&s=612x612&w=0&k=20&c=TVHIwkn691mm3IsFN0oiBFKObv2fHpNbs7p1DOKPIMo=" 
+          src="https://images.unsplash.com/photo-1561345822-1d5a8ccea1ff?w=2070&auto=format&fit=crop&q=80&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGJsYWNrJTIwd2VkZGluZ3xlbnwwfHwwfHx8MA%3D%3D" 
           alt="Wedding reception"
           className="w-full h-full object-cover object-center"
         />
@@ -309,7 +311,7 @@ const LandingPage: React.FC = () => {
             <h2 className="text-3xl md:text-4xl font-serif font-bold text-navy mb-4">
               Everything You Need for Your Perfect Wedding
             </h2>
-            <p className="text-xl text-navy font-semibold max-w-2xl mx-auto">
+            <p className="text-xl text-navy font-bold max-w-2xl mx-auto drop-shadow-md">
               Our comprehensive platform provides all the tools and connections you need 
               to plan your dream wedding effortlessly.
             </p>
@@ -324,7 +326,7 @@ const LandingPage: React.FC = () => {
                 <h3 className="text-xl font-semibold text-gray-900 mb-3">
                   {feature.title}
                 </h3>
-                <p className="text-gray-600">
+                <p className="text-gray-700 font-medium drop-shadow-sm">
                   {feature.description}
                 </p>
               </div>
@@ -340,7 +342,7 @@ const LandingPage: React.FC = () => {
             <h2 className="text-3xl md:text-4xl font-serif font-bold text-gray-900 mb-4">
               How It Works
             </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            <p className="text-xl text-gray-800 font-medium max-w-2xl mx-auto drop-shadow-sm">
               Planning your wedding has never been easier. Follow these simple steps 
               to create your perfect day.
             </p>
@@ -355,7 +357,7 @@ const LandingPage: React.FC = () => {
                 <h3 className="text-xl font-semibold text-gray-900 mb-3">
                   {step.title}
                 </h3>
-                <p className="text-gray-600">
+                <p className="text-gray-700 font-medium drop-shadow-sm">
                   {step.description}
                 </p>
               </div>
@@ -371,7 +373,7 @@ const LandingPage: React.FC = () => {
             <h2 className="text-3xl md:text-4xl font-serif font-bold text-navy mb-4">
               What Couples Say About Us
             </h2>
-            <p className="text-xl text-navy font-semibold max-w-2xl mx-auto">
+            <p className="text-xl text-navy font-bold max-w-2xl mx-auto drop-shadow-md">
               Join thousands of happy couples who planned their perfect wedding with Aurora Nuptials.
             </p>
           </div>
@@ -384,7 +386,7 @@ const LandingPage: React.FC = () => {
                     <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
                   ))}
                 </div>
-                <p className="text-gray-600 mb-4 italic">
+                <p className="text-gray-700 font-medium mb-4 italic drop-shadow-sm">
                   "{testimonial.text}"
                 </p>
                 <div className="flex items-center">

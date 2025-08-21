@@ -118,7 +118,7 @@ const LoginPage: React.FC = () => {
           <h2 className="text-3xl font-serif font-bold text-gray-900 mb-2">
             Welcome Back
           </h2>
-          <p className="text-gray-600">
+          <p className="text-gray-800 font-medium drop-shadow-sm">
             Sign in to continue planning your perfect wedding
           </p>
         </div>
@@ -226,7 +226,7 @@ const LoginPage: React.FC = () => {
 
           {/* Sign Up Link */}
           <div className="mt-6 text-center">
-            <p className="text-sm text-gray-600">
+            <p className="text-sm text-gray-700 font-medium drop-shadow-sm">
               Don't have an account?{' '}
               <Link
                 to="/register"
