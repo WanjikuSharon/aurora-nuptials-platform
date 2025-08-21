@@ -213,7 +213,7 @@ const LandingPage: React.FC = () => {
     <div className="min-h-screen">
       <Header />
 {/* Hero Section with Carousel Background */}
-<section className="relative min-h-screen flex items-center py-20 lg:py-32 overflow-hidden pt-16 lg:pt-20">
+<section className="relative min-h-screen flex items-center py-20 lg:py-32 overflow-hidden pt-20 lg:pt-24">
   {/* Background Carousel */}
   <div className="absolute inset-0 z-0">
     <div className="carousel-container relative w-full h-full">

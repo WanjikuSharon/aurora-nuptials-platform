@@ -117,6 +117,28 @@
       background-color: rgba(10, 25, 47, 0.8);
     }
   }
+
+  /* Header spacing utilities */
+  .header-spacing {
+    padding-top: 5rem; /* 80px for mobile */
+  }
+
+  @media (min-width: 1024px) {
+    .header-spacing {
+      padding-top: 6rem; /* 96px for desktop */
+    }
+  }
+
+  .page-with-header {
+    min-height: 100vh;
+    padding-top: 5rem; /* 80px for mobile */
+  }
+
+  @media (min-width: 1024px) {
+    .page-with-header {
+      padding-top: 6rem; /* 96px for desktop */
+    }
+  }
 }
 
 /* Custom scrollbar */
