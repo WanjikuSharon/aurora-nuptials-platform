@@ -21,7 +21,11 @@ export default {
         },
         'rose-gold': '#E8B4B8',
         'rose-dust': '#D4A5A5',
-        'rose-blush': '#F7E7E7'
+        'rose-blush': '#F7E7E7',
+        'deep-rose': '#C1999B',
+        'dusty-rose': '#D4A5A5',
+        'soft-cream': '#FAF9F7',
+        'warm-gray': '#F5F4F2'
       },
       fontFamily: {
         serif: ['Georgia', 'serif'],
