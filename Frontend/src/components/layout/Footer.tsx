@@ -111,7 +111,7 @@ const Footer: React.FC = () => {
                 <MapPin className="w-5 h-5 text-rose-gold" />
                 <span className="text-gray-300">
                   123 Wedding Lane<br />
-                  Love City, LC 12345
+                  Love City, Nairobi, Kenya
                 </span>
               </div>
             </div>
