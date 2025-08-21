@@ -145,7 +145,7 @@ const LandingPage: React.FC = () => {
       </div>
       <div className="carousel-slide">
         <img 
-          src="https://images.unsplash.com/photo-1606216794074-735e91aa2c92?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" 
+          src="https://plus.unsplash.com/premium_photo-1674484905263-5a95892ee187?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjV8fGJsYWNrJTIwd2VkZGluZ3xlbnwwfHwwfHx8MA%3D%3D" 
           alt="Wedding reception"
           className="w-full h-full object-cover"
         />
@@ -159,8 +159,8 @@ const LandingPage: React.FC = () => {
       </div>
       <div className="carousel-slide">
         <img 
-          src="https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" 
-          alt="Wedding venue"
+          src="https://images.unsplash.com/photo-1561345822-1d5a8ccea1ff?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGJsYWNrJTIwd2VkZGluZ3xlbnwwfHwwfHx8MA%3D%3D" 
+          alt="Wedding vows exchange"
           className="w-full h-full object-cover"
         />
       </div>
