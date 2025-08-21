@@ -8,24 +8,31 @@ export default {
     extend: {
       colors: {
         primary: {
-          50: '#fdf2f8',
-          100: '#fce7f3',
-          200: '#fbcfe8',
-          300: '#f9a8d4',
-          400: '#f472b6',
-          500: '#ec4899', // Main pink
-          600: '#db2777',
-          700: '#be185d',
-          800: '#9d174d',
-          900: '#831843',
+          50: '#f0f4ff',
+          100: '#dfe7ff',
+          200: '#c5d4ff',
+          300: '#a3b9fc',
+          400: '#8194f6',
+          500: '#6366f1',
+          600: '#4f46e5',
+          700: '#4338ca',
+          800: '#3730a3',
+          900: '#312e81',
         },
-        'rose-gold': '#E8B4B8',
-        'rose-dust': '#D4A5A5',
-        'rose-blush': '#F7E7E7',
-        'deep-rose': '#C1999B',
-        'dusty-rose': '#D4A5A5',
-        'soft-cream': '#FAF9F7',
-        'warm-gray': '#F5F4F2'
+        // Modern Luxury Navy & Gold Theme
+        'navy-blue': '#0A192F',
+        'champagne-gold': '#D4AF37',
+        'ivory': '#F8F5F2',
+        'blush-accent': '#F4C2C2',
+        'charcoal': '#333333',
+        // Legacy color mappings for existing components
+        'rose-gold': '#D4AF37', // Now maps to champagne gold
+        'rose-dust': '#F4C2C2', // Now maps to blush accent
+        'rose-blush': '#F8F5F2', // Now maps to ivory
+        'deep-rose': '#0A192F', // Now maps to navy blue
+        'dusty-rose': '#F4C2C2', // Now maps to blush accent
+        'soft-cream': '#F8F5F2', // Now maps to ivory
+        'warm-gray': '#333333' // Now maps to charcoal
       },
       fontFamily: {
         serif: ['Georgia', 'serif'],
