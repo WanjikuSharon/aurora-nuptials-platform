@@ -131,39 +131,39 @@ const LandingPage: React.FC = () => {
   return (
     <div className="min-h-screen">
 {/* Hero Section with Carousel Background */}
-<section className="relative py-20 lg:py-32 overflow-hidden">
+<section className="relative min-h-screen flex items-center py-20 lg:py-32 overflow-hidden">
   {/* Background Carousel */}
   <div className="absolute inset-0 z-0">
     <div className="carousel-container relative w-full h-full">
       {/* Carousel slides will cycle through these images */}
-      <div className="carousel-slide active">
-        <img 
-          src="https://images.unsplash.com/photo-1664646449779-ee70428b3936?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8YmxhY2slMjB3ZWRkaW5nfGVufDB8fDB8fHww" 
-          alt="Beautiful wedding ceremony"
-          className="w-full h-full object-cover"
-        />
       </div>
       <div className="carousel-slide">
         <img 
-          src="https://plus.unsplash.com/premium_photo-1674484905263-5a95892ee187?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjV8fGJsYWNrJTIwd2VkZGluZ3xlbnwwfHwwfHx8MA%3D%3D" 
-          alt="Wedding reception"
-          className="w-full h-full object-cover"
-        />
-      </div>
-      <div className="carousel-slide">
-        <img 
-          src="https://images.unsplash.com/photo-1664646449735-69bc987a49da?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8YmxhY2slMjB3ZWRkaW5nfGVufDB8fDB8fHww" 
+          src="https://images.unsplash.com/photo-1664646449735-69bc987a49da?w=2070&auto=format&fit=crop&q=80&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8YmxhY2slMjB3ZWRkaW5nfGVufDB8fDB8fHww" 
           alt="Bride and groom"
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover object-center"
         />
       </div>
       <div className="carousel-slide">
         <img 
-          src="https://images.unsplash.com/photo-1561345822-1d5a8ccea1ff?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGJsYWNrJTIwd2VkZGluZ3xlbnwwfHwwfHx8MA%3D%3D" 
+          src="https://images.unsplash.com/photo-1561345822-1d5a8ccea1ff?w=2070&auto=format&fit=crop&q=80&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGJsYWNrJTIwd2VkZGluZ3xlbnwwfHwwfHx8MA%3D%3D" 
           alt="Wedding vows exchange"
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover object-center"
+        />
+          </div>
+          <div className="carousel-slide active">
+        <img 
+          src="https://images.unsplash.com/photo-1664646449779-ee70428b3936?w=2070&auto=format&fit=crop&q=80&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8YmxhY2slMjB3ZWRkaW5nfGVufDB8fDB8fHww" 
+          alt="Beautiful wedding ceremony"
+          className="w-full h-full object-cover object-center"
         />
       </div>
+      <div className="carousel-slide">
+        <img 
+          src="https://plus.unsplash.com/premium_photo-1674484905263-5a95892ee187?w=2070&auto=format&fit=crop&q=80&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjV8fGJsYWNrJTIwd2VkZGluZ3xlbnwwfHwwfHx8MA%3D%3D" 
+          alt="Wedding reception"
+          className="w-full h-full object-cover object-center"
+        />
     </div>
     {/* Dark overlay for better text readability */}
     <div className="absolute inset-0 bg-black/40 z-10"></div>
