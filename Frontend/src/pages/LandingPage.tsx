@@ -89,40 +89,86 @@ const LandingPage: React.FC = () => {
 
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="gradient-bg py-20 lg:py-32">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <div className="flex justify-center mb-6">
-              <Sparkles className="w-12 h-12 text-rose-gold animate-pulse-soft" />
-            </div>
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif font-bold text-gray-900 mb-6">
-              Your Dream Wedding
-              <span className="block text-rose-gold">Awaits</span>
-            </h1>
-            <p className="text-xl md:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto">
-              Plan your perfect wedding with Aurora Nuptials. Connect with trusted vendors, 
-              discover stunning venues, and create memories that last a lifetime.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                to="/register"
-                className="btn-primary text-lg px-8 py-4 inline-flex items-center"
-              >
-                Start Planning Today
-                <ArrowRight className="ml-2 w-5 h-5" />
-              </Link>
-              <Link
-                to="/venues"
-                className="btn-secondary text-lg px-8 py-4 inline-flex items-center"
-              >
-                Browse Venues
-                <MapPin className="ml-2 w-5 h-5" />
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
+{/* Hero Section with Carousel Background */}
+<section className="relative py-20 lg:py-32 overflow-hidden">
+  {/* Background Carousel */}
+  <div className="absolute inset-0 z-0">
+    <div className="carousel-container relative w-full h-full">
+      {/* Carousel slides will cycle through these images */}
+      <div className="carousel-slide active">
+        <img 
+          src="https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" 
+          alt="Beautiful wedding ceremony"
+          className="w-full h-full object-cover"
+        />
+      </div>
+      <div className="carousel-slide">
+        <img 
+          src="https://images.unsplash.com/photo-1606216794074-735e91aa2c92?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" 
+          alt="Wedding reception"
+          className="w-full h-full object-cover"
+        />
+      </div>
+      <div className="carousel-slide">
+        <img 
+          src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=2069&q=80" 
+          alt="Bride and groom"
+          className="w-full h-full object-cover"
+        />
+      </div>
+      <div className="carousel-slide">
+        <img 
+          src="https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" 
+          alt="Wedding venue"
+          className="w-full h-full object-cover"
+        />
+      </div>
+    </div>
+    {/* Dark overlay for better text readability */}
+    <div className="absolute inset-0 bg-black/40 z-10"></div>
+  </div>
+
+  {/* Content */}
+  <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="text-center">
+      <div className="flex justify-center mb-6">
+        <Sparkles className="w-12 h-12 text-rose-gold animate-pulse-soft drop-shadow-lg" />
+      </div>
+      <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif font-bold text-white mb-6 drop-shadow-lg">
+        Your Dream Wedding
+        <span className="block text-rose-gold">Awaits</span>
+      </h1>
+      <p className="text-xl md:text-2xl text-white/90 mb-8 max-w-3xl mx-auto drop-shadow-md">
+        Plan your perfect wedding with Aurora Nuptials. Connect with trusted vendors, 
+        discover stunning venues, and create memories that last a lifetime.
+      </p>
+      <div className="flex flex-col sm:flex-row gap-4 justify-center">
+        <Link
+          to="/register"
+          className="btn-primary text-lg px-8 py-4 inline-flex items-center shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200"
+        >
+          Start Planning Today
+          <ArrowRight className="ml-2 w-5 h-5" />
+        </Link>
+        <Link
+          to="/venues"
+          className="btn-secondary text-lg px-8 py-4 inline-flex items-center shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200"
+        >
+          Browse Venues
+          <MapPin className="ml-2 w-5 h-5" />
+        </Link>
+      </div>
+    </div>
+  </div>
+
+  {/* Carousel indicators */}
+  <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-30 flex space-x-2">
+    <button className="carousel-indicator active w-3 h-3 rounded-full bg-white/70 hover:bg-white transition-colors" data-slide="0"></button>
+    <button className="carousel-indicator w-3 h-3 rounded-full bg-white/30 hover:bg-white/70 transition-colors" data-slide="1"></button>
+    <button className="carousel-indicator w-3 h-3 rounded-full bg-white/30 hover:bg-white/70 transition-colors" data-slide="2"></button>
+    <button className="carousel-indicator w-3 h-3 rounded-full bg-white/30 hover:bg-white/70 transition-colors" data-slide="3"></button>
+  </div>
+</section>
 
       {/* Stats Section */}
       <section className="py-16 bg-white">
