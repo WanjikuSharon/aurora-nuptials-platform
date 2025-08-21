@@ -138,7 +138,7 @@ const LandingPage: React.FC = () => {
       {/* Carousel slides will cycle through these images */}
       <div className="carousel-slide active">
         <img 
-          src="https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" 
+          src="https://unsplash.com/photos/a-bride-and-groom-embracing-each-other-in-a-field-VPCIQIa_Hjk" 
           alt="Beautiful wedding ceremony"
           className="w-full h-full object-cover"
         />

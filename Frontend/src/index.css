@@ -13,24 +13,75 @@
 }
 
 @layer components {
+  /* Premium Button Styles */
   .btn-primary {
-    @apply bg-rose-gold hover:bg-deep-rose text-white font-medium py-3 px-6 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg;
+    @apply bg-deep-blush hover:bg-rose-gold text-pure-white font-medium py-3 px-6 rounded-premium transition-all duration-300 shadow-premium hover:shadow-lg transform hover:scale-105;
   }
   
   .btn-secondary {
-    @apply bg-white hover:bg-gray-50 text-deep-rose border border-dusty-rose font-medium py-3 px-6 rounded-lg transition-all duration-200;
+    @apply bg-pure-white hover:bg-champagne text-charcoal border border-rose-gold font-medium py-3 px-6 rounded-premium transition-all duration-300 shadow-soft hover:shadow-premium;
   }
   
+  .btn-gold {
+    @apply bg-gold-accent hover:bg-yellow-500 text-pure-white font-medium py-3 px-6 rounded-premium transition-all duration-300 shadow-gold hover:shadow-lg transform hover:scale-105;
+  }
+  
+  /* Premium Card Styles */
   .card {
-    @apply bg-white rounded-xl shadow-sm border border-gray-100 p-6;
+    @apply bg-pure-white rounded-premium shadow-soft border border-rose-gold/20 p-6 hover:shadow-premium transition-all duration-300;
   }
   
+  .card-testimonial {
+    @apply bg-pure-white rounded-premium shadow-premium border-2 border-rose-gold/30 p-6 hover:border-rose-gold/50 transition-all duration-300;
+  }
+  
+  /* Typography Classes */
+  .heading-primary {
+    @apply text-charcoal font-serif font-bold;
+  }
+  
+  .heading-secondary {
+    @apply text-deep-blush font-serif font-semibold;
+  }
+  
+  .text-subtitle {
+    @apply text-medium-gray font-medium;
+  }
+  
+  /* Form Elements */
   .input-field {
-    @apply w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rose-gold focus:border-transparent transition-all duration-200;
+    @apply w-full px-4 py-3 border border-gray-300 rounded-premium focus:ring-2 focus:ring-deep-blush focus:border-transparent transition-all duration-200 font-medium;
   }
   
+  /* Background Gradients */
   .gradient-bg {
-    @apply bg-gradient-to-br from-soft-cream via-warm-gray to-dusty-rose/20;
+    @apply bg-romantic-gradient;
+  }
+  
+  .hero-overlay {
+    @apply bg-hero-overlay;
+  }
+  
+  /* Navigation Styles */
+  .nav-link {
+    @apply text-charcoal hover:text-deep-blush transition-colors duration-300 font-medium relative;
+  }
+  
+  .nav-link::after {
+    @apply content-[''] absolute bottom-0 left-0 w-0 h-0.5 bg-deep-blush transition-all duration-300;
+  }
+  
+  .nav-link:hover::after {
+    @apply w-full;
+  }
+  
+  /* Dividers */
+  .gold-divider {
+    @apply h-px bg-gold-divider;
+  }
+  
+  .section-divider {
+    @apply w-24 h-0.5 bg-gold-accent mx-auto mb-8;
   }
 }
 
