@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { 
   Heart, 
@@ -13,6 +13,47 @@ import {
 } from 'lucide-react';
 
 const LandingPage: React.FC = () => {
+  // Add this useEffect for carousel functionality
+  useEffect(() => {
+    const slides = document.querySelectorAll('.carousel-slide');
+    const indicators = document.querySelectorAll('.carousel-indicator');
+    let currentSlide = 0;
+    
+    const showSlide = (index: number) => {
+      // Hide all slides
+      slides.forEach(slide => slide.classList.remove('active'));
+      indicators.forEach(indicator => indicator.classList.remove('active'));
+      
+      // Show current slide
+      slides[index]?.classList.add('active');
+      indicators[index]?.classList.add('active');
+    };
+
+    const nextSlide = () => {
+      currentSlide = (currentSlide + 1) % slides.length;
+      showSlide(currentSlide);
+    };
+
+    // Auto-advance carousel every 5 seconds
+    const interval = setInterval(nextSlide, 5000);
+
+    // Add click listeners to indicators
+    indicators.forEach((indicator, index) => {
+      indicator.addEventListener('click', () => {
+        currentSlide = index;
+        showSlide(currentSlide);
+      });
+    });
+
+    // Cleanup
+    return () => {
+      clearInterval(interval);
+      indicators.forEach(indicator => {
+        indicator.removeEventListener('click', () => {});
+      });
+    };
+  }, []);
+
   const features = [
     {
       icon: MapPin,
