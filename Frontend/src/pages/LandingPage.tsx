@@ -38,20 +38,20 @@ const LandingPage: React.FC = () => {
 
   const testimonials = [
     {
-      name: 'Sarah & Michael',
-      location: 'New York',
+      name: 'Sharon & Kelvin',
+      location: 'Nairobi, Kenya',
       text: 'Aurora Nuptials made planning our dream wedding effortless. The platform connected us with amazing vendors!',
       rating: 5,
     },
     {
-      name: 'Emily & James',
-      location: 'California',
+      name: 'Aurora & Allan',
+      location: 'Kisumu, Kenya',
       text: 'From venue selection to vendor coordination, everything was seamless. Highly recommend!',
       rating: 5,
     },
     {
       name: 'Jessica & David',
-      location: 'Texas',
+      location: 'Kakamega, Kenya',
       text: 'The registry feature was a hit with our guests. Planning has never been this organized!',
       rating: 5,
     },
