@@ -7,7 +7,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        'rose-gold': '#E8B4B8',
+        'rose-gold': '#e0119bff',
         'dusty-rose': '#D4A5A5',
         'warm-gray': '#F5F5F0',
         'deep-rose': '#B8868B',
