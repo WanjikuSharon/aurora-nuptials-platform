@@ -8,31 +8,32 @@ export default {
     extend: {
       colors: {
         primary: {
-          50: '#f0f4ff',
-          100: '#dfe7ff',
-          200: '#c5d4ff',
-          300: '#a3b9fc',
-          400: '#8194f6',
-          500: '#6366f1',
-          600: '#4f46e5',
-          700: '#4338ca',
-          800: '#3730a3',
-          900: '#312e81',
+          50: '#fef7f7',
+          100: '#feeaea',
+          200: '#fdd8d8',
+          300: '#fbb9b9',
+          400: '#f68e8e',
+          500: '#ec5757',
+          600: '#d73f3f',
+          700: '#b52f2f',
+          800: '#9a2929',
+          900: '#822626',
         },
-        // Modern Luxury Navy & Gold Theme
-        'navy-blue': '#0A192F',
-        'champagne-gold': '#D4AF37',
-        'ivory': '#F8F5F2',
-        'blush-accent': '#F4C2C2',
-        'charcoal': '#333333',
+        // Classic Romantic Blush & Gold Elegance Theme
+        'blush-pink': '#FADADD',
+        'rose-gold': '#B76E79',
+        'champagne': '#F7E7CE',
+        'gold-accent': '#D4AF37',
+        'pure-white': '#FFFFFF',
         // Legacy color mappings for existing components
-        'rose-gold': '#D4AF37', // Now maps to champagne gold
-        'rose-dust': '#F4C2C2', // Now maps to blush accent
-        'rose-blush': '#F8F5F2', // Now maps to ivory
-        'deep-rose': '#0A192F', // Now maps to navy blue
-        'dusty-rose': '#F4C2C2', // Now maps to blush accent
-        'soft-cream': '#F8F5F2', // Now maps to ivory
-        'warm-gray': '#333333' // Now maps to charcoal
+        'rose-dust': '#FADADD', // Now maps to blush pink
+        'rose-blush': '#F7E7CE', // Now maps to champagne/beige
+        'deep-rose': '#B76E79', // Now maps to rose gold
+        'dusty-rose': '#FADADD', // Now maps to blush pink
+        'soft-cream': '#F7E7CE', // Now maps to champagne/beige
+        'warm-gray': '#B76E79', // Now maps to rose gold
+        'champagne-gold': '#D4AF37', // Maps to gold accent
+        'ivory': '#FFFFFF' // Maps to pure white
       },
       fontFamily: {
         serif: ['Georgia', 'serif'],
