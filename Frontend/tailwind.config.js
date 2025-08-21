@@ -8,39 +8,46 @@ export default {
     extend: {
       colors: {
         primary: {
-          50: '#fef7f7',
-          100: '#feeaea',
-          200: '#fdd8d8',
-          300: '#fbb9b9',
-          400: '#f68e8e',
-          500: '#E6A6A1', // Deep blush primary
-          600: '#d73f3f',
-          700: '#b52f2f',
-          800: '#9a2929',
-          900: '#822626',
+          50: '#f0f4ff',
+          100: '#dfe7ff',
+          200: '#c5d4ff',
+          300: '#a3b9fc',
+          400: '#8194f6',
+          500: '#0A192F', // Navy primary
+          600: '#4f46e5',
+          700: '#4338ca',
+          800: '#3730a3',
+          900: '#312e81',
         },
-        // Improved Classic Romantic Palette (Richer)
-        'deep-blush': '#E6A6A1',      // Primary romantic color
-        'rose-gold': '#c90aa9a6',       // Luxurious accent
+        // Navy + Gold + Champagne (Luxury Classic)
+        'navy': '#0A192F',            // Primary brand color
         'champagne': '#F7E7CE',       // Soft base
-        'gold-accent': '#D4AF37',     // Sparingly for icons/highlights
-        'pure-white': '#FFFFFF',      // Text backgrounds, cards
+        'gold': '#D4AF37',            // Luxury accent
+        'ivory': '#FAF9F6',           // Clean backgrounds
+        'rose-gold-accent': '#B76E79', // Optional accent
+        
+        // Typography colors
         'charcoal': '#2E2E2E',        // Headings for readability
         'medium-gray': '#555555',     // Subtext for readability
+        'pure-white': '#FFFFFF',      // Pure white for contrast
         
-        // Legacy mappings (updated to new palette)
-        'blush-pink': '#E6A6A1',      // Maps to deep blush
-        'rose-dust': '#E6A6A1',       // Maps to deep blush
-        'rose-blush': '#F7E7CE',      // Maps to champagne
-        'deep-rose': '#B76E79',       // Maps to rose gold
-        'dusty-rose': '#E6A6A1',      // Maps to deep blush
-        'soft-cream': '#F7E7CE',      // Maps to champagne
+        // Legacy mappings (updated to luxury palette)
+        'deep-blush': '#0A192F',      // Maps to navy
+        'rose-gold': '#D4AF37',       // Maps to gold
+        'rose-dust': '#F7E7CE',       // Maps to champagne
+        'rose-blush': '#FAF9F6',      // Maps to ivory
+        'deep-rose': '#0A192F',       // Maps to navy
+        'dusty-rose': '#F7E7CE',      // Maps to champagne
+        'soft-cream': '#FAF9F6',      // Maps to ivory
         'warm-gray': '#2E2E2E',       // Maps to charcoal
-        'champagne-gold': '#D4AF37',  // Maps to gold accent
-        'ivory': '#FFFFFF',           // Maps to pure white
+        'champagne-gold': '#D4AF37',  // Maps to gold
+        'ivory': '#FAF9F6',           // Maps to ivory
+        'blush-pink': '#F7E7CE',      // Maps to champagne
+        'gold-accent': '#D4AF37',     // Maps to gold
         
         // Gradient helper colors
-        'champagne-overlay': 'rgba(247, 231, 206, 0.6)'
+        'champagne-overlay': 'rgba(247, 231, 206, 0.6)',
+        'navy-overlay': 'rgba(10, 25, 47, 0.8)'
       },
       fontFamily: {
         serif: ['Playfair Display', 'Georgia', 'serif'],
@@ -51,13 +58,16 @@ export default {
         'soft': '8px',
       },
       boxShadow: {
-        'premium': '0 4px 20px rgba(230, 166, 161, 0.15)',
+        'premium': '0 4px 20px rgba(10, 25, 47, 0.15)',
         'gold': '0 4px 20px rgba(212, 175, 55, 0.15)',
+        'navy': '0 4px 20px rgba(10, 25, 47, 0.25)',
         'soft': '0 2px 10px rgba(0, 0, 0, 0.08)',
       },
       backgroundImage: {
-        'romantic-gradient': 'linear-gradient(135deg, #E6A6A1 0%, #F7E7CE 100%)',
-        'hero-overlay': 'linear-gradient(rgba(247, 231, 206, 0.6), rgba(247, 231, 206, 0.6))',
+        'luxury-gradient': 'linear-gradient(135deg, #0A192F 0%, #F7E7CE 100%)',
+        'navy-gradient': 'linear-gradient(135deg, #0A192F 0%, #2A3E5F 100%)',
+        'champagne-gradient': 'linear-gradient(135deg, #F7E7CE 0%, #FAF9F6 100%)',
+        'hero-overlay': 'linear-gradient(rgba(10, 25, 47, 0.6), rgba(10, 25, 47, 0.6))',
         'gold-divider': 'linear-gradient(90deg, transparent 0%, #D4AF37 50%, transparent 100%)',
       }
     },

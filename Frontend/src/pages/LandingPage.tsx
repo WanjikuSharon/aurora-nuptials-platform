@@ -138,7 +138,7 @@ const LandingPage: React.FC = () => {
       {/* Carousel slides will cycle through these images */}
       <div className="carousel-slide active">
         <img 
-          src="https://unsplash.com/photos/a-bride-and-groom-embracing-each-other-in-a-field-VPCIQIa_Hjk" 
+          src="https://images.unsplash.com/photo-1664646449779-ee70428b3936?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8YmxhY2slMjB3ZWRkaW5nfGVufDB8fDB8fHww" 
           alt="Beautiful wedding ceremony"
           className="w-full h-full object-cover"
         />
@@ -152,7 +152,7 @@ const LandingPage: React.FC = () => {
       </div>
       <div className="carousel-slide">
         <img 
-          src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?ixlib=rb-4.0.3&auto=format&fit=crop&w=2069&q=80" 
+          src="https://images.unsplash.com/photo-1607190074257-dd4b7af0309f?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
           alt="Bride and groom"
           className="w-full h-full object-cover"
         />

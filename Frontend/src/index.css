@@ -15,33 +15,33 @@
 @layer components {
   /* Premium Button Styles */
   .btn-primary {
-    @apply bg-deep-blush hover:bg-rose-gold text-pure-white font-medium py-3 px-6 rounded-premium transition-all duration-300 shadow-premium hover:shadow-lg transform hover:scale-105;
+    @apply bg-navy hover:bg-gold text-pure-white font-medium py-3 px-6 rounded-premium transition-all duration-300 shadow-navy hover:shadow-gold transform hover:scale-105;
   }
   
   .btn-secondary {
-    @apply bg-pure-white hover:bg-champagne text-charcoal border border-rose-gold font-medium py-3 px-6 rounded-premium transition-all duration-300 shadow-soft hover:shadow-premium;
+    @apply bg-pure-white hover:bg-champagne text-navy border border-gold font-medium py-3 px-6 rounded-premium transition-all duration-300 shadow-soft hover:shadow-premium;
   }
   
   .btn-gold {
-    @apply bg-gold-accent hover:bg-yellow-500 text-pure-white font-medium py-3 px-6 rounded-premium transition-all duration-300 shadow-gold hover:shadow-lg transform hover:scale-105;
+    @apply bg-gold hover:bg-navy text-navy hover:text-pure-white font-medium py-3 px-6 rounded-premium transition-all duration-300 shadow-gold hover:shadow-navy transform hover:scale-105;
   }
   
   /* Premium Card Styles */
   .card {
-    @apply bg-pure-white rounded-premium shadow-soft border border-rose-gold/20 p-6 hover:shadow-premium transition-all duration-300;
+    @apply bg-pure-white rounded-premium shadow-soft border border-gold/20 p-6 hover:shadow-premium transition-all duration-300;
   }
   
   .card-testimonial {
-    @apply bg-pure-white rounded-premium shadow-premium border-2 border-rose-gold/30 p-6 hover:border-rose-gold/50 transition-all duration-300;
+    @apply bg-pure-white rounded-premium shadow-premium border-2 border-gold/30 p-6 hover:border-gold/50 transition-all duration-300;
   }
   
   /* Typography Classes */
   .heading-primary {
-    @apply text-charcoal font-serif font-bold;
+    @apply text-navy font-serif font-bold;
   }
   
   .heading-secondary {
-    @apply text-deep-blush font-serif font-semibold;
+    @apply text-gold font-serif font-semibold;
   }
   
   .text-subtitle {
@@ -50,12 +50,12 @@
   
   /* Form Elements */
   .input-field {
-    @apply w-full px-4 py-3 border border-gray-300 rounded-premium focus:ring-2 focus:ring-deep-blush focus:border-transparent transition-all duration-200 font-medium;
+    @apply w-full px-4 py-3 border border-gray-300 rounded-premium focus:ring-2 focus:ring-gold focus:border-transparent transition-all duration-200 font-medium;
   }
   
   /* Background Gradients */
   .gradient-bg {
-    @apply bg-romantic-gradient;
+    @apply bg-luxury-gradient;
   }
   
   .hero-overlay {
@@ -64,11 +64,11 @@
   
   /* Navigation Styles */
   .nav-link {
-    @apply text-charcoal hover:text-deep-blush transition-colors duration-300 font-medium relative;
+    @apply text-navy hover:text-gold transition-colors duration-300 font-medium relative;
   }
   
   .nav-link::after {
-    @apply content-[''] absolute bottom-0 left-0 w-0 h-0.5 bg-deep-blush transition-all duration-300;
+    @apply content-[''] absolute bottom-0 left-0 w-0 h-0.5 bg-gold transition-all duration-300;
   }
   
   .nav-link:hover::after {
@@ -81,7 +81,7 @@
   }
   
   .section-divider {
-    @apply w-24 h-0.5 bg-gold-accent mx-auto mb-8;
+    @apply w-24 h-0.5 bg-gold mx-auto mb-8;
   }
 }
 
