@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { 
   Heart, 
@@ -13,6 +13,47 @@ import {
 } from 'lucide-react';
 
 const LandingPage: React.FC = () => {
+  // Stats counter state
+  const [statsVisible, setStatsVisible] = useState(false);
+  const statsRef = useRef<HTMLDivElement>(null);
+
+  // Custom hook for counting animation
+  const useCountUp = (end: number, start: number = 0, duration: number = 2000) => {
+    const [count, setCount] = useState(start);
+    
+    useEffect(() => {
+      if (!statsVisible) return;
+      
+      let startTime: number;
+      let animationFrame: number;
+      
+      const animate = (currentTime: number) => {
+        if (!startTime) startTime = currentTime;
+        const progress = Math.min((currentTime - startTime) / duration, 1);
+        
+        // Easing function for smooth animation
+        const easeOutCubic = 1 - Math.pow(1 - progress, 3);
+        const currentCount = Math.floor(start + (end - start) * easeOutCubic);
+        
+        setCount(currentCount);
+        
+        if (progress < 1) {
+          animationFrame = requestAnimationFrame(animate);
+        }
+      };
+      
+      animationFrame = requestAnimationFrame(animate);
+      
+      return () => {
+        if (animationFrame) {
+          cancelAnimationFrame(animationFrame);
+        }
+      };
+    }, [end, start, duration, statsVisible]);
+    
+    return count;
+  };
+
   // Add this useEffect for carousel functionality
   useEffect(() => {
     const slides = document.querySelectorAll('.carousel-slide');
@@ -52,6 +93,24 @@ const LandingPage: React.FC = () => {
         indicator.removeEventListener('click', () => {});
       });
     };
+  }, []);
+
+  // Stats visibility observer
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setStatsVisible(true);
+        }
+      },
+      { threshold: 0.5 }
+    );
+
+    if (statsRef.current) {
+      observer.observe(statsRef.current);
+    }
+
+    return () => observer.disconnect();
   }, []);
 
   const features = [
@@ -99,10 +158,10 @@ const LandingPage: React.FC = () => {
   ];
 
   const stats = [
-    { number: '10,000+', label: 'Happy Couples' },
-    { number: '5,000+', label: 'Trusted Vendors' },
-    { number: '1,000+', label: 'Beautiful Venues' },
-    { number: '50+', label: 'Cities Covered' },
+    { number: 10000, label: 'Happy Couples', suffix: '+' },
+    { number: 5000, label: 'Trusted Vendors', suffix: '+' },
+    { number: 1000, label: 'Beautiful Venues', suffix: '+' },
+    { number: 50, label: 'Cities Covered', suffix: '+' },
   ];
 
   const planningSteps = [
@@ -127,6 +186,27 @@ const LandingPage: React.FC = () => {
       description: 'Enjoy your perfect wedding with confidence.',
     },
   ];
+
+  // Animated Stat Component
+  const AnimatedStat: React.FC<{ stat: { number: number; label: string; suffix: string } }> = ({ stat }) => {
+    const count = useCountUp(stat.number);
+    
+    const formatNumber = (num: number) => {
+      if (num >= 1000) {
+        return (num / 1000).toFixed(num % 1000 === 0 ? 0 : 1) + 'k';
+      }
+      return num.toString();
+    };
+    
+    return (
+      <div className="text-center">
+        <div className="text-3xl md:text-4xl font-bold text-gold mb-2">
+          {formatNumber(count)}{stat.suffix}
+        </div>
+        <div className="text-navy font-medium">{stat.label}</div>
+      </div>
+    );
+  };
 
   return (
     <div className="min-h-screen">
@@ -160,7 +240,7 @@ const LandingPage: React.FC = () => {
       </div>
       <div className="carousel-slide">
         <img 
-          src="https://plus.unsplash.com/premium_photo-1674484905263-5a95892ee187?w=2070&auto=format&fit=crop&q=80&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjV8fGJsYWNrJTIwd2VkZGluZ3xlbnwwfHwwfHx8MA%3D%3D" 
+          src="https://media.istockphoto.com/id/1212726850/photo/festive-table-setting-candles-for-wedding-party.webp?a=1&b=1&s=612x612&w=0&k=20&c=TVHIwkn691mm3IsFN0oiBFKObv2fHpNbs7p1DOKPIMo=" 
           alt="Wedding reception"
           className="w-full h-full object-cover object-center"
         />
@@ -214,14 +294,9 @@ const LandingPage: React.FC = () => {
       {/* Stats Section */}
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <div ref={statsRef} className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-rose-gold mb-2">
-                  {stat.number}
-                </div>
-                <div className="text-gray-600 font-medium">{stat.label}</div>
-              </div>
+              <AnimatedStat key={index} stat={stat} />
             ))}
           </div>
         </div>
@@ -231,10 +306,10 @@ const LandingPage: React.FC = () => {
       <section className="py-20 gradient-bg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-serif font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl md:text-4xl font-serif font-bold text-navy mb-4">
               Everything You Need for Your Perfect Wedding
             </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            <p className="text-xl text-navy font-semibold max-w-2xl mx-auto">
               Our comprehensive platform provides all the tools and connections you need 
               to plan your dream wedding effortlessly.
             </p>
@@ -293,10 +368,10 @@ const LandingPage: React.FC = () => {
       <section className="py-20 gradient-bg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-serif font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl md:text-4xl font-serif font-bold text-navy mb-4">
               What Couples Say About Us
             </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            <p className="text-xl text-navy font-semibold max-w-2xl mx-auto">
               Join thousands of happy couples who planned their perfect wedding with Aurora Nuptials.
             </p>
           </div>
