@@ -7,10 +7,10 @@ export default {
   theme: {
     extend: {
       colors: {
-        'rose-gold': '#e0119bff',
-        'dusty-rose': '#D4A5A5',
-        'warm-gray': '#F5F5F0',
-        'deep-rose': '#B8868B',
+        'rose-gold': '#e0119bda',
+        'dusty-rose': '#df24dfff',
+        'warm-gray': '#1e0c5f98',
+        'deep-rose': '#f06d7aff',
         'soft-cream': '#FAF9F6',
       },
       fontFamily: {
