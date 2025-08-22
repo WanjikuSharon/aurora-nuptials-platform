@@ -374,7 +374,7 @@ const LandingPage: React.FC = () => {
               What Couples Say About Us
             </h2>
             <p className="text-xl text-navy font-bold max-w-2xl mx-auto drop-shadow-md">
-              Join thousands of happy couples who planned their perfect wedding with Aurora Nuptials.
+              Join thousands of happy couples who planned their perfect wedding with Aurora Nuptials...
             </p>
           </div>
 
