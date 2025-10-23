@@ -270,7 +270,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## 📞 Support
 
-For support, email support@auroranuptials.com or create an issue in this repository.
+For support, email auroranuptials@gmail.com or create an issue in this repository.
 
 ---
 
